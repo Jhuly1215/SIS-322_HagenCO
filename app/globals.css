@@ -1,0 +1,183 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated color palette for HagenCO brand */
+  --background: #faf9f6; /* Warm cream main background */
+  --foreground: #3c5170; /* Dark Blue for main text */
+  --card: #d9cbc2; /* Beige for cards and sections */
+  --card-foreground: #3c5170; /* Dark Blue text on cards */
+  --popover: #d9cbc2; /* Beige for popovers */
+  --popover-foreground: #3c5170; /* Dark Blue text */
+  --primary: #e3c288; /* Golden for main buttons and highlights */
+  --primary-foreground: #3c5170; /* Dark Blue text on golden buttons */
+  --secondary: #809bc7; /* Light Blue for secondary buttons */
+  --secondary-foreground: #3c5170; /* Dark Blue text on light blue */
+  --muted: #d9cbc2; /* Beige for muted backgrounds */
+  --muted-foreground: #809bc7; /* Light Blue for subtitles */
+  --accent: #e3c288; /* Golden for accents */
+  --accent-foreground: #3c5170; /* Dark Blue text on accents */
+  --destructive: #a6514a; /* Earthy Red for alerts/delete actions */
+  --destructive-foreground: #ffffff; /* White text on red */
+  --border: #809bc7; /* Light Blue for borders */
+  --input: #ffffff; /* White for form inputs */
+  --ring: #e3c288; /* Golden for focus rings */
+  --chart-1: #e3c288; /* Golden */
+  --chart-2: #a6514a; /* Earthy Red */
+  --chart-3: #809bc7; /* Light Blue */
+  --chart-4: #3c5170; /* Dark Blue */
+  --chart-5: #d9cbc2; /* Beige */
+  --radius: 0.5rem; /* Rounded corners */
+  --sidebar: #d9cbc2; /* Beige */
+  --sidebar-foreground: #3c5170; /* Dark Blue */
+  --sidebar-primary: #e3c288; /* Golden */
+  --sidebar-primary-foreground: #3c5170; /* Dark Blue */
+  --sidebar-accent: #a6514a; /* Earthy Red */
+  --sidebar-accent-foreground: #ffffff; /* White */
+  --sidebar-border: #e3c288; /* Golden */
+  --sidebar-ring: #e3c288; /* Golden */
+}
+
+.dark {
+  --background: #3c5170; /* Dark Blue main background */
+  --foreground: #faf9f6; /* Warm cream text */
+  --card: #2a3a52; /* Darker blue for cards */
+  --card-foreground: #d9cbc2; /* Beige text on dark cards */
+  --popover: #2a3a52; /* Darker blue */
+  --popover-foreground: #d9cbc2; /* Beige text */
+  --primary: #e3c288; /* Golden remains same */
+  --primary-foreground: #3c5170; /* Dark Blue text */
+  --secondary: #809bc7; /* Light Blue remains same */
+  --secondary-foreground: #3c5170; /* Dark Blue text */
+  --muted: #2a3a52; /* Darker blue for muted */
+  --muted-foreground: #809bc7; /* Light Blue for subtitles */
+  --accent: #e3c288; /* Golden */
+  --accent-foreground: #3c5170; /* Dark Blue */
+  --destructive: #a6514a; /* Earthy Red */
+  --destructive-foreground: #ffffff; /* White */
+  --border: #809bc7; /* Light Blue */
+  --input: #2a3a52; /* Darker blue for inputs */
+  --ring: #e3c288; /* Golden */
+  --chart-1: #e3c288;
+  --chart-2: #a6514a;
+  --chart-3: #809bc7;
+  --chart-4: #faf9f6;
+  --chart-5: #d9cbc2;
+  --sidebar: #2a3a52;
+  --sidebar-foreground: #d9cbc2;
+  --sidebar-primary: #e3c288;
+  --sidebar-primary-foreground: #3c5170;
+  --sidebar-accent: #a6514a;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #809bc7;
+  --sidebar-ring: #e3c288;
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Added custom utility classes for consistent color usage */
+  .bg-warm-cream {
+    background-color: #faf9f6;
+  }
+
+  .bg-golden {
+    background-color: #e3c288;
+  }
+
+  .bg-earthy-red {
+    background-color: #a6514a;
+  }
+
+  .bg-dark-blue {
+    background-color: #3c5170;
+  }
+
+  .bg-light-blue {
+    background-color: #809bc7;
+  }
+
+  .bg-beige {
+    background-color: #d9cbc2;
+  }
+
+  .text-golden {
+    color: #e3c288;
+  }
+
+  .text-earthy-red {
+    color: #a6514a;
+  }
+
+  .text-dark-blue {
+    color: #3c5170;
+  }
+
+  .text-light-blue {
+    color: #809bc7;
+  }
+
+  .border-golden {
+    border-color: #e3c288;
+  }
+
+  .border-light-blue {
+    border-color: #809bc7;
+  }
+
+  .hover\:bg-golden:hover {
+    background-color: #e3c288;
+  }
+
+  .hover\:text-golden:hover {
+    color: #e3c288;
+  }
+}
