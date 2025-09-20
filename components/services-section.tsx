@@ -1,9 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 
 const ServiceIcon = ({ type }: { type: string }) => {
   const iconProps = {
@@ -13,7 +11,8 @@ const ServiceIcon = ({ type }: { type: string }) => {
     fill: "none",
     stroke: "currentColor",
     strokeWidth: "1.5",
-    className: "text-dark-blue group-hover:text-golden transition-colors duration-300",
+    className:
+      "text-dark-blue transition-colors duration-300 group-hover:text-golden drop-shadow-[0_4px_12px_rgba(166,81,74,0.25)]",
   }
 
   switch (type) {
@@ -90,70 +89,76 @@ const services = [
   {
     id: "bigdata",
     title: "Big Data y Analíticas",
-    description: "Transformamos datos en insights valiosos para tu negocio",
-    subdomain: "bigdata.hagen.co",
+    short: "Transformamos datos en decisiones accionables.",
     details:
-      "Implementamos soluciones de Big Data que permiten procesar, analizar y visualizar grandes volúmenes de información para tomar decisiones estratégicas basadas en datos reales.",
+      "Integración de fuentes (ETL/ELT), data lakes y warehouses, dashboards ejecutivos y modelos de predicción. Gobernanza de datos, catalogación y linaje para asegurar calidad y trazabilidad.",
+    bullets: ["ETL/ELT modern stack", "BI & dashboards", "ML para pronósticos"],
   },
   {
     id: "calidad",
-    title: "Calidad",
-    description: "Aseguramos la excelencia en cada línea de código",
-    subdomain: "calidad.hagen.co",
+    title: "Calidad de Software",
+    short: "Excelencia continua en cada release.",
     details:
-      "Nuestros procesos de QA garantizan software robusto, confiable y libre de errores mediante testing automatizado, revisiones de código y metodologías ágiles.",
+      "Estrategias de QA con SAST/DAST, pruebas funcionales y E2E, automatización CI/CD y métricas de cobertura. Shift-left testing para detectar fallos antes de producción.",
+    bullets: ["SAST/DAST", "E2E & regresión", "CI/CD con gates"],
   },
   {
     id: "cloud",
-    title: "Cloud",
-    description: "Infraestructura escalable en la nube",
-    subdomain: "cloud.hagen.co",
+    title: "Cloud & DevOps",
+    short: "Infraestructura escalable, segura y costo-eficiente.",
     details:
-      "Diseñamos y desplegamos arquitecturas cloud nativas que escalan automáticamente, optimizan costos y garantizan alta disponibilidad para tus aplicaciones.",
+      "Arquitecturas nativas en la nube, IaC, observabilidad y alta disponibilidad. Optimización de costos, backups y políticas de recuperación ante desastres.",
+    bullets: ["IaC (Terraform)", "Observabilidad 360°", "Alta disponibilidad"],
   },
   {
     id: "hardware",
-    title: "Hardware",
-    description: "Soluciones de hardware personalizadas",
-    subdomain: "hardware.hagen.co",
+    title: "Hardware & IoT",
+    short: "Equipamiento y dispositivos a tu medida.",
     details:
-      "Proveemos consultoría especializada en hardware, desde servidores empresariales hasta dispositivos IoT, optimizando rendimiento y eficiencia energética.",
+      "Dimensionamiento de servidores, edge computing e IoT. Gestión de activos, rendimiento y energía, con planes de mantenimiento preventivo.",
+    bullets: ["Edge/IoT", "Mantenimiento preventivo", "Optimización energética"],
   },
   {
     id: "redes",
     title: "Redes",
-    description: "Conectividad robusta y segura",
-    subdomain: "redes.hagen.co",
+    short: "Conectividad empresarial robusta y segura.",
     details:
-      "Diseñamos e implementamos infraestructuras de red empresariales que garantizan conectividad confiable, alta velocidad y seguridad en todas las comunicaciones.",
+      "Diseño de topologías, segmentación, QoS y SD-WAN. Hardening, VPNs y monitoreo para máxima disponibilidad y baja latencia.",
+    bullets: ["Segmentación & QoS", "SD-WAN/VPN", "Monitoreo continuo"],
   },
   {
     id: "seguridad",
-    title: "Seguridad",
-    description: "Protección integral de tus activos digitales",
-    subdomain: "seguridad.hagen.co",
+    title: "Ciberseguridad",
+    short: "Protección integral de activos y datos críticos.",
     details:
-      "Implementamos estrategias de ciberseguridad multicapa que protegen tu información crítica contra amenazas internas y externas, cumpliendo estándares internacionales.",
+      "Gestión de identidades (IAM), hardening, respuesta a incidentes y SIEM. Cumplimiento normativo y gestión de riesgos end-to-end.",
+    bullets: ["IAM & RBAC", "SIEM & respuesta", "Cumplimiento y riesgos"],
   },
   {
     id: "software",
-    title: "Software",
-    description: "Desarrollo de software a medida",
-    subdomain: "software.hagen.co",
+    title: "Desarrollo de Software",
+    short: "Soluciones a medida, centradas en el usuario.",
     details:
-      "Creamos aplicaciones web, móviles y de escritorio personalizadas que se adaptan perfectamente a los procesos únicos de tu organización.",
+      "Web, móvil y escritorio con arquitectura limpia, APIs escalables y UX accesible. Ciclos ágiles con entrega continua.",
+    bullets: ["Arquitectura limpia", "APIs escalables", "UX accesible"],
   },
-]
+] as const
 
 export function ServicesSection() {
-  const [selectedService, setSelectedService] = useState<(typeof services)[0] | null>(null)
+  // ya no usamos estado para diálogos; se mantiene por si deseas efectos de hover selectivo a futuro
+  useState(null)
 
   return (
-    <section id="servicios" className="py-20">
-      <div className="container px-4">
+    <section id="servicios" className="py-20 relative">
+      {/* halo rojizo muy suave (decorativo) */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full blur-3xl opacity-15 bg-earthy-red"
+      />
+      <div className="container px-4 relative">
         <div className="text-center space-y-4 mb-16">
           <h2 className="text-3xl lg:text-4xl font-bold text-dark-blue">Nuestros Servicios</h2>
-          <div className="w-24 h-1 bg-golden mx-auto rounded-full"></div>
+          <div className="mx-auto h-1 w-28 rounded-full bg-gradient-to-r from-earthy-red via-golden to-earthy-red" />
           <p className="text-lg text-light-blue max-w-2xl mx-auto text-pretty">
             Ofrecemos soluciones tecnológicas integrales para impulsar la transformación digital de tu empresa
           </p>
@@ -163,52 +168,33 @@ export function ServicesSection() {
           {services.map((service) => (
             <Card
               key={service.id}
-              className="group cursor-pointer transition-all duration-300 hover:shadow-lg hover:-translate-y-1 bg-beige border-light-blue hover:border-golden"
-              onClick={() => setSelectedService(service)}
+              className="group relative transition-all duration-300 bg-beige border-light-blue hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(166,81,74,0.18)] hover:border-earthy-red/60"
             >
-              <CardHeader className="text-center pb-4">
-                <div className="flex justify-center mb-4">
+              {/* cinta decorativa roja (esquina) */}
+              <div className="absolute -top-2 -right-2 h-8 w-8 rounded-lg bg-earthy-red/90" />
+              <CardHeader className="text-center pb-2">
+                <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-earthy-red/10 ring-2 ring-earthy-red/20">
                   <ServiceIcon type={service.id} />
                 </div>
-                <CardTitle className="text-lg font-semibold text-dark-blue group-hover:text-golden transition-colors">
-                  {service.title}
-                </CardTitle>
+                <CardTitle className="text-lg font-semibold text-dark-blue">{service.title}</CardTitle>
+                <CardDescription className="text-sm text-light-blue">{service.short}</CardDescription>
               </CardHeader>
-              <CardContent className="text-center">
-                <CardDescription className="text-sm text-light-blue">{service.description}</CardDescription>
+              <CardContent className="pt-4">
+                <p className="text-sm text-dark-blue text-pretty">
+                  {service.details}
+                </p>
+                <ul className="mt-3 space-y-1.5 text-sm">
+                  {service.bullets.map((b, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="mt-1 inline-block h-2 w-2 rounded-full bg-earthy-red" />
+                      <span className="text-dark-blue">{b}</span>
+                    </li>
+                  ))}
+                </ul>
               </CardContent>
             </Card>
           ))}
         </div>
-
-        <Dialog open={!!selectedService} onOpenChange={() => setSelectedService(null)}>
-          <DialogContent className="max-w-md bg-beige border-light-blue">
-            <DialogHeader>
-              <DialogTitle className="flex items-center gap-3 text-dark-blue">
-                {selectedService && <ServiceIcon type={selectedService.id} />}
-                {selectedService?.title}
-              </DialogTitle>
-              <DialogDescription className="text-left pt-4 text-dark-blue">
-                {selectedService?.details}
-              </DialogDescription>
-            </DialogHeader>
-            <div className="flex flex-col gap-3 mt-6">
-              <Button
-                onClick={() => window.open(`https://${selectedService?.subdomain}`, "_blank")}
-                className="w-full bg-golden text-dark-blue hover:bg-golden/90 font-semibold"
-              >
-                Visitar {selectedService?.subdomain}
-              </Button>
-              <Button
-                variant="outline"
-                onClick={() => setSelectedService(null)}
-                className="w-full border-light-blue text-light-blue hover:bg-light-blue hover:text-dark-blue"
-              >
-                Cerrar
-              </Button>
-            </div>
-          </DialogContent>
-        </Dialog>
       </div>
     </section>
   )
